@@ -18,12 +18,21 @@ app.get("/", (req, res) => {
 
 app.post("/api/stripe/webhook",express.raw({type:"application/json"}),stripeWebhook)
 const port=process.env.PORT || 5000
-app.use(express.json())
-app.use(cookieParser())
+
+app.use(express.json());
+app.use(cookieParser());
+
 app.use(cors({
   origin: [process.env.CLIENT_URL, "http://localhost:5173"],
   credentials: true
 }));
+
+app.options("*", cors({
+  origin: [process.env.CLIENT_URL, "http://localhost:5173"],
+  credentials: true
+}));
+
+
 app.use("/api/auth",authRouter)
 app.use("/api/user",userRouter)
 app.use("/api/website",websiteRouter)
