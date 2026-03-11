@@ -12,6 +12,10 @@ import { stripeWebhook } from "./controllers/stripeWebhook.controller.js"
 
 const app=express()
 
+app.get("/", (req, res) => {
+  res.send("API is running successfully");
+});
+
 app.post("/api/stripe/webhook",express.raw({type:"application/json"}),stripeWebhook)
 const port=process.env.PORT || 5000
 app.use(express.json())
