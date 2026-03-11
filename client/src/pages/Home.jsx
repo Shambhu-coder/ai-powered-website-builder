@@ -25,7 +25,7 @@ function Home() {
     const handleLogOut = async () => {
         console.log("logout click")
         try {
-            await API.get(`/api/auth/logout`, { withCredentials: true })
+            await API.get(`/api/auth/logout`)
             dispatch(setUserData(null))
             setOpenProfile(false)
         } catch (error) {
@@ -39,7 +39,7 @@ function Home() {
 
             try {
 
-                const result = await API.get(`/api/website/get-all`, { withCredentials: true })
+                const result = await API.get(`/api/website/get-all`)
                 setWebsites(result.data || [])
 
             } catch (error) {

@@ -67,7 +67,7 @@ if(planKey=="free"){
 }
 setLoading(planKey)
 try {
-    const result=await API.post(`/api/billing`,{planType:planKey},{withCredentials:true})
+    const result=await API.post(`/api/billing`,{planType:planKey})
     window.location.href=result.data.sessionUrl
 } catch (error) {
     console.log(error)

@@ -11,7 +11,7 @@ function useGetCurrentUser() {
     useEffect(() => {
         const getCurrentUser = async () => {
             try {
-              const result=await API.get(`/api/user/me`,{withCredentials:true})
+              const result=await API.get(`/api/user/me`)
               dispatch(setUserData(result.data))
             } catch (error) {
 console.log(error)
