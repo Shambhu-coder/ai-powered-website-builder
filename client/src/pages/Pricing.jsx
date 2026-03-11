@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 import { motion } from "motion/react"
+import API from '../api/axios.js'
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { serverUrl } from '../App';
@@ -66,7 +67,7 @@ if(planKey=="free"){
 }
 setLoading(planKey)
 try {
-    const result=await axios.post(`${serverUrl}/api/billing`,{planType:planKey},{withCredentials:true})
+    const result=await API.post(`${serverUrl}/api/billing`,{planType:planKey},{withCredentials:true})
     window.location.href=result.data.sessionUrl
 } catch (error) {
     console.log(error)

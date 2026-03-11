@@ -4,6 +4,7 @@ import { motion } from "motion/react"
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import API from '../api/axios.js'
 import { serverUrl } from '../App'
 function Dashboard() {
     const { userData } = useSelector(state => state.user)
@@ -14,7 +15,7 @@ function Dashboard() {
     const [copiedId, setCopiedId] = useState(null)
     const handleDeploy = async (id) => {
         try {
-            const result = await axios.get(`${serverUrl}/api/website/deploy/${id}`, { withCredentials: true })
+            const result = await API.get(`${serverUrl}/api/website/deploy/${id}`, { withCredentials: true })
             window.open(`${result.data.url}`, "_blank")
             setWebsites((prev) =>
         prev.map((w) =>
@@ -33,7 +34,7 @@ function Dashboard() {
             setLoading(true)
             try {
 
-                const result = await axios.get(`${serverUrl}/api/website/get-all`, { withCredentials: true })
+                const result = await API.get(`${serverUrl}/api/website/get-all`, { withCredentials: true })
                 setWebsites(result.data || [])
                 setLoading(false)
             } catch (error) {

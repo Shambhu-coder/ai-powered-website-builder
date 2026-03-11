@@ -1,4 +1,5 @@
 import axios from 'axios'
+import API from '../api/axios.js'
 import React from 'react'
 import { useEffect } from 'react'
 import { serverUrl } from '../App'
@@ -10,7 +11,7 @@ function useGetCurrentUser() {
     useEffect(() => {
         const getCurrentUser = async () => {
             try {
-              const result=await axios.get(`${serverUrl}/api/user/me`,{withCredentials:true})
+              const result=await API.get(`${serverUrl}/api/user/me`,{withCredentials:true})
               dispatch(setUserData(result.data))
             } catch (error) {
 console.log(error)

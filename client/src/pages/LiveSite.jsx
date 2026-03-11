@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { serverUrl } from '../App'
 import axios from 'axios'
+import API from '../api/axios.js'
 
 function LiveSite() {
     const {id}=useParams()
@@ -10,7 +11,7 @@ function LiveSite() {
     useEffect(() => {
         const handleGetWebsite = async () => {
             try {
-                const result = await axios.get(`${serverUrl}/api/website/get-by-slug/${id}`)
+                const result = await API.get(`${serverUrl}/api/website/get-by-slug/${id}`)
                setHtml(result.data.latestCode)
             } catch (error) {
                 console.log(error)

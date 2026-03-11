@@ -4,6 +4,7 @@ import LoginModal from '../components/LoginModal'
 import { useDispatch, useSelector } from 'react-redux'
 import { Coins } from "lucide-react"
 import { serverUrl } from '../App'
+import API from '../api/axios.js'
 import axios from 'axios'
 import { setUserData } from '../redux/userSlice'
 import { useNavigate } from 'react-router-dom'
@@ -24,7 +25,7 @@ function Home() {
     const handleLogOut = async () => {
         console.log("logout click")
         try {
-            await axios.get(`${serverUrl}/api/auth/logout`, { withCredentials: true })
+            await API.get(`${serverUrl}/api/auth/logout`, { withCredentials: true })
             dispatch(setUserData(null))
             setOpenProfile(false)
         } catch (error) {
@@ -38,7 +39,7 @@ function Home() {
 
             try {
 
-                const result = await axios.get(`${serverUrl}/api/website/get-all`, { withCredentials: true })
+                const result = await API.get(`${serverUrl}/api/website/get-all`, { withCredentials: true })
                 setWebsites(result.data || [])
 
             } catch (error) {
