@@ -12,6 +12,7 @@ import billingRouter from "./routes/billing.routes.js";
 import { stripeWebhook } from "./controllers/stripeWebhook.controller.js";
 
 const app = express();
+app.set("trust proxy", 1)
 
 app.get("/", (req, res) => {
   res.send("API is running successfully");
