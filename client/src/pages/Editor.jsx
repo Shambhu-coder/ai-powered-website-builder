@@ -37,7 +37,7 @@ function WebsiteEditor() {
         setPrompt("")
         setMessages((m) => [...m, { role: "user", content: prompt }])
         try {
-            const result = await API.post(`${serverUrl}/api/website/update/${id}`, { prompt: text }, { withCredentials: true })
+            const result = await API.post(`/api/website/update/${id}`, { prompt: text }, { withCredentials: true })
             console.log(result)
             setUpdateLoading(false)
             setMessages((m) => [...m, { role: "ai", content: result.data.message }])
@@ -50,7 +50,7 @@ function WebsiteEditor() {
 
     const handleDeploy = async () => {
             try {
-                const result = await API.get(`${serverUrl}/api/website/deploy/${website._id}`, { withCredentials: true })
+                const result = await API.get(`/api/website/deploy/${website._id}`, { withCredentials: true })
                 window.open(`${result.data.url}`, "_blank")
                
             } catch (error) {
@@ -71,7 +71,7 @@ function WebsiteEditor() {
     useEffect(() => {
         const handleGetWebsite = async () => {
             try {
-                const result = await API.get(`${serverUrl}/api/website/get-by-id/${id}`, { withCredentials: true })
+                const result = await API.get(`/api/website/get-by-id/${id}`, { withCredentials: true })
                 setWebsite(result.data)
                 setCode(result.data.latestCode)
                 setMessages(result.data.conversation)

@@ -24,7 +24,7 @@ function Generate() {
     const handleGenerateWebsite = async () => {
         setLoading(true)
         try {
-            const result = await API.post(`${serverUrl}/api/website/generate`, { prompt }, { withCredentials: true })
+            const result = await API.post(`/api/website/generate`, { prompt }, { withCredentials: true })
             console.log(result)
             setProgress(100)
             setLoading(false)

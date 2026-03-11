@@ -15,7 +15,7 @@ function Dashboard() {
     const [copiedId, setCopiedId] = useState(null)
     const handleDeploy = async (id) => {
         try {
-            const result = await API.get(`${serverUrl}/api/website/deploy/${id}`, { withCredentials: true })
+            const result = await API.get(`/api/website/deploy/${id}`, { withCredentials: true })
             window.open(`${result.data.url}`, "_blank")
             setWebsites((prev) =>
         prev.map((w) =>
@@ -34,7 +34,7 @@ function Dashboard() {
             setLoading(true)
             try {
 
-                const result = await API.get(`${serverUrl}/api/website/get-all`, { withCredentials: true })
+                const result = await API.get(`/api/website/get-all`, { withCredentials: true })
                 setWebsites(result.data || [])
                 setLoading(false)
             } catch (error) {

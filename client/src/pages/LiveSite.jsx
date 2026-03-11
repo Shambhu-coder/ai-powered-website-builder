@@ -11,7 +11,7 @@ function LiveSite() {
     useEffect(() => {
         const handleGetWebsite = async () => {
             try {
-                const result = await API.get(`${serverUrl}/api/website/get-by-slug/${id}`)
+                const result = await API.get(`/api/website/get-by-slug/${id}`)
                setHtml(result.data.latestCode)
             } catch (error) {
                 console.log(error)

@@ -12,7 +12,7 @@ const dispatch=useDispatch()
     const handleGoogleAuth=async ()=>{
         try {
             const result=await signInWithPopup(auth,provider)
-            const {data}=await API.post(`${serverUrl}/api/auth/google`,{
+            const {data}=await API.post(`/api/auth/google`,{
                 name:result.user.displayName,
                 email:result.user.email,
                 avatar:result.user.photoURL
