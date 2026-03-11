@@ -1,11 +1,9 @@
 import { ArrowLeft } from 'lucide-react'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from "motion/react"
 import { useState } from 'react'
 import API from '../api/axios.js'
-import axios from "axios"
-import { serverUrl } from '../App'
 
 const PHASES = [
     "Analyzing your idea…",
