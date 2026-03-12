@@ -4,14 +4,23 @@ const isAuth=async (req,res,next)=>{
 try {
     const token=req.cookies.token
     if(!token){
-        return res.status(400).json({message:"token not found"})
+        return res.status(401).json({message:"token not found, please login"})
     }
-     const decoded=jwt.verify(token,process.env.JWT_SECRET)
-     req.user=await User.findById(decoded.id)
-     next()
+    let decoded
+    try {
+        decoded=jwt.verify(token,process.env.JWT_SECRET)
+    } catch(jwtError) {
+        return res.status(401).json({message:"invalid or expired token, please login again"})
+    }
+    const user=await User.findById(decoded.id)
+    if(!user){
+        return res.status(401).json({message:"user not found"})
+    }
+    req.user=user
+    next()
 } catch (error) {
-    return res.status(500).json({message:"invalid token"})
+    return res.status(500).json({message:"auth error: "+error.message})
 }
 }
-
+ 
 export default isAuth

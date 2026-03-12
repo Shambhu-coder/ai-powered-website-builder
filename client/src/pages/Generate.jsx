@@ -1,9 +1,11 @@
 import { ArrowLeft } from 'lucide-react'
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from "motion/react"
 import { useState } from 'react'
 import API from '../api/axios.js'
+import axios from "axios"
+import { serverUrl } from '../App'
 
 const PHASES = [
     "Analyzing your idea…",
@@ -29,7 +31,7 @@ function Generate() {
             navigate(`/editor/${result.data.websiteId}`)
         } catch (error) {
             setLoading(false)
-            setError(error.response.data.message || "something went wrong")
+            setError(error?.response?.data?.message || "Something went wrong. Please try again.")
             console.log(error)
         }
     }

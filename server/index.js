@@ -25,8 +25,20 @@ const port = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cookieParser());
 
+const allowedOrigins = [
+  process.env.CLIENT_URL,
+  process.env.FRONTEND_URL,
+].filter(Boolean);
+
 app.use(cors({
-  origin: process.env.CLIENT_URL,
+  origin: function (origin, callback) {
+    // Allow requests with no origin (e.g. mobile apps, curl, Postman)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.length === 0 || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error(`CORS blocked: ${origin}`));
+  },
   credentials: true
 }));
 

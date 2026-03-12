@@ -77,7 +77,7 @@ function WebsiteEditor() {
                 setMessages(result.data.conversation)
             } catch (error) {
                 console.log(error)
-                setError(error.response.data.message)
+                setError(error?.response?.data?.message || "Failed to load website. Please try again.")
             }
         }
         handleGetWebsite()
@@ -277,9 +277,6 @@ function WebsiteEditor() {
             </div>
         )
     }
-
-
-
 }
 
 

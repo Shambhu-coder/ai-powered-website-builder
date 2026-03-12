@@ -18,12 +18,12 @@ function Dashboard() {
             const result = await API.get(`/api/website/deploy/${id}`)
             window.open(`${result.data.url}`, "_blank")
             setWebsites((prev) =>
-        prev.map((w) =>
-          w._id === id
-            ? { ...w, deployed: true, deployUrl: result.data.url }
-            : w
-        )
-      );
+                prev.map((w) =>
+                    w._id === id
+                        ? { ...w, deployed: true, deployUrl: result.data.url }
+                        : w
+                )
+            );
         } catch (error) {
             console.log(error)
         }
@@ -33,12 +33,13 @@ function Dashboard() {
         const handleGetAllWebsites = async () => {
             setLoading(true)
             try {
+
                 const result = await API.get(`/api/website/get-all`)
                 setWebsites(result.data || [])
                 setLoading(false)
             } catch (error) {
                 console.log(error)
-                setError(error.response.data.message)
+                setError(error?.response?.data?.message || "Failed to load websites. Please try again.")
                 setLoading(false)
             }
         }
@@ -98,10 +99,10 @@ function Dashboard() {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: i * 0.05 }}
                                 whileHover={{ y: -6 }}
-                               
+
                                 className="rounded-2xl bg-white/5 border border-white/10 overflow-hidden hover:bg-white/10 transition flex flex-col"
                             >
-                                <div className='relative h-40 bg-black cursor-pointer'  onClick={()=>navigate(`/editor/${w._id}`)}>
+                                <div className='relative h-40 bg-black cursor-pointer' onClick={() => navigate(`/editor/${w._id}`)}>
                                     <iframe srcDoc={w.latestCode} className='absolute inset-0 w-[140%] h-[140%] scale-[0.72] origin-top-left pointer-events-none bg-white' />
                                     <div className='absolute inset-0 bg-black/30' />
                                 </div>
@@ -134,16 +135,16 @@ function Dashboard() {
                                             }
                         `}
                                     >
-                                        { copied?(
+                                        {copied ? (
                                             <>
-                                            <Check size={14}/>
-                                            Link Copied
+                                                <Check size={14} />
+                                                Link Copied
                                             </>
-                                        ):
-                                        <>
-                                        <Share2 size={14}/>
-                                        Share Link
-                                        </>
+                                        ) :
+                                            <>
+                                                <Share2 size={14} />
+                                                Share Link
+                                            </>
                                         }
                                     </motion.button>)}
 
