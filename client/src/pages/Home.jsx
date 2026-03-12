@@ -26,10 +26,12 @@ function Home() {
         console.log("logout click")
         try {
             await API.get(`/api/auth/logout`)
-            dispatch(setUserData(null))
-            setOpenProfile(false)
         } catch (error) {
             console.log(error)
+        } finally {
+            localStorage.removeItem("token")
+            dispatch(setUserData(null))
+            setOpenProfile(false)
         }
     }
 

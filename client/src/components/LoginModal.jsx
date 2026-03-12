@@ -17,7 +17,11 @@ const dispatch=useDispatch()
                 email:result.user.email,
                 avatar:result.user.photoURL
             })
-            dispatch(setUserData(data))
+            // Store token in localStorage for cross-origin requests
+            if (data.token) {
+                localStorage.setItem("token", data.token)
+            }
+            dispatch(setUserData(data.user || data))
             onClose()
         } catch (error) {
             console.log(error)
