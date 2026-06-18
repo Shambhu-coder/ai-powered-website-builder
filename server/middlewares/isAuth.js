@@ -26,6 +26,7 @@ const isAuth = async (req, res, next) => {
         }
 
         req.user = user
+        console.log("Authenticated user updated:", user);
         next()
     } catch (error) {
         return res.status(500).json({ message: "auth error: " + error.message })
