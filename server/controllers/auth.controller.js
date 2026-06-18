@@ -27,6 +27,6 @@ export const logOut = async (req, res) => {
         // Client is responsible for removing the token from localStorage
         return res.status(200).json({ message: "log out successfully" })
     } catch (error) {
-        return res.status(500).json({ message: `log out error ${error}` })
+        return res.status(500).json({ message: `log out error ${error}` }) 
     }
 }
